@@ -1,7 +1,7 @@
-import { Model, DataTypes } from 'sequelize';
+import { BOOLEAN, INTEGER, Model } from 'sequelize';
 import db from '.';
 
-class matches extends Model {
+export default class Matches extends Model {
   id: number;
   homeTeam: number;
   homeTeamGoals: number;
@@ -9,19 +9,44 @@ class matches extends Model {
   awayTeamGoals: number;
   inProgress: boolean;
 }
-
-matches.init({
-  id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-  homeTeam: DataTypes.INTEGER,
-  homeTeamGoals: DataTypes.INTEGER,
-  awayTeam: DataTypes.INTEGER,
-  awayTeamGoals: DataTypes.INTEGER,
-  inProgress: DataTypes.BOOLEAN,
-}, {
-  underscored: true,
-  sequelize: db,
-  modelName: 'matches',
-  timestamps: false,
-});
-
-export default matches;
+Matches.init(
+  {
+    id: {
+      type: INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+      allowNull: false,
+    },
+    homeTeam: {
+      type: INTEGER,
+      field: 'home_team',
+      allowNull: false,
+    },
+    homeTeamGoals: {
+      type: INTEGER,
+      field: 'home_team_goals',
+      allowNull: false,
+    },
+    awayTeam: {
+      type: INTEGER,
+      field: 'away_team',
+      allowNull: false,
+    },
+    awayTeamGoals: {
+      type: INTEGER,
+      field: 'away_team_goals',
+      allowNull: false,
+    },
+    inProgress: {
+      type: BOOLEAN,
+      field: 'in_progress',
+      allowNull: false,
+    },
+  },
+  {
+    sequelize: db,
+    tableName: 'matches',
+    timestamps: false,
+    underscored: true,
+  },
+);

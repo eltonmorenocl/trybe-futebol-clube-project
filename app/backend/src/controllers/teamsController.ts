@@ -18,7 +18,9 @@ export class TeamsController {
       const { id } = req.params;
       const resultTeamsId = await TeamsServices.teamsFindId(id);
       // console.log('resultTeams controller', resultTeamsId);
-      if (!resultTeamsId) return res.status(401).json({ message: 'Erro nos times' });
+      if (!resultTeamsId) {
+        return res.status(401).json({ message: 'There is no team with such id!' });
+      }
       return res.status(200).json(resultTeamsId);
     } catch (error) {
       return res.status(500).json({ message: error });
