@@ -60,7 +60,7 @@ describe('Endpoint /login', () => {
         });
 
       expect(chaiHttpResponse.status).to.be.equal(401);
-      expect(chaiHttpResponse.body.message).to.be.equal('Incorrect password');
+      expect(chaiHttpResponse.body.message).to.be.equal('Incorrect email or password');
       expect(chaiHttpResponse.body).to.have.property('message');
      });
 
@@ -68,7 +68,7 @@ describe('Endpoint /login', () => {
       chaiHttpResponse = await chai
         .request(app)
         .get('/login/validate')
-        .set('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InJvbGUiOiJhZG1pbiIsImlkIjoxfSwiaWF0IjoxNjU1MTQwNjgzLCJleHAiOjE2NTU3NDU0ODN9.xXsv7IshnVZtT9183_pxwmFYi4pF9J6UQttQ1zqAyp8')
+        .set('authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InJvbGUiOiJhZG1pbiIsImlkIjoxfSwiaWF0IjoxNjU1ODE3NzE5LCJleHAiOjE2NTY0MjI1MTl9.Ev4IYnl0JapUKdQU_RmlcGSv4PnzP1XiO4FHJBpp3Lk')
 
       expect(chaiHttpResponse.status).to.be.equal(200);
     });
@@ -103,7 +103,7 @@ describe('Endpoint /login', () => {
         .get('/login/validate')
         .set('authorization', '9eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InJvbGUiOiJhZG1pbiIsImlkIjoxfSwiaWF0IjoxNjU1MTQwNjgzLCJleHAiOjE2NTU3NDU0ODN9.xXsv7IshnVZtT9183_pxwmFYi4pF9J6UQttQ1zqAyp8')
 
-      expect(chaiHttpResponse.status).to.be.equal(500);
+      expect(chaiHttpResponse.status).to.be.equal(401);
       expect(chaiHttpResponse.body).to.have.property('message');
     });
 });
